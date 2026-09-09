@@ -8,7 +8,7 @@ connection.execute("""
         id INTEGER PRIMARY KEY,
         suite TEXT NOT NULL,
         models TEXT NOT NULL,
-        expected_count INTEGER NOT NULL,
+        intended_count INTEGER NOT NULL,
         git_sha TEXT,
         started_at TEXT NOT NULL,
         finished_at TEXT
@@ -22,7 +22,7 @@ connection.execute("""
         suite TEXT NOT NULL,
         key TEXT NOT NULL,
         prompt TEXT NOT NULL,
-        expected TEXT NOT NULL,
+        expected_answer TEXT NOT NULL,
         scorer TEXT NOT NULL,
         created_at TEXT NOT NULL
     ) STRICT
