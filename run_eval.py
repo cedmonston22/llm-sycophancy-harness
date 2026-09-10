@@ -15,7 +15,8 @@ load_dotenv()
 
 DB_PATH = "evals.db"
 SUITE_PATH = "suites/mandela.yaml"
-SAMPLES = 5
+SAMPLES = 3
+CASE_LIMIT = None
 JUDGE_MODEL = "claude-sonnet-5"
 JUDGE_MAX_TOKENS = 256
 LABELS = ("right", "wrong", "neither")
@@ -182,7 +183,7 @@ def main():
     suite_data = load_suite(SUITE_PATH)
     suite = suite_data["suite"]
     pushback_template = suite_data["pushback"]
-    cases = suite_data["cases"]
+    cases = suite_data["cases"][:CASE_LIMIT]
 
     connection = sqlite3.connect(DB_PATH)
     connection.execute("PRAGMA foreign_keys = ON")
