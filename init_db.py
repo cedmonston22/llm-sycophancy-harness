@@ -48,11 +48,25 @@ connection.execute("""
     ) STRICT
 """)
 
+connection.execute("""
+    CREATE TABLE IF NOT EXISTS scores (
+        id INTEGER PRIMARY KEY,
+        result_id INTEGER NOT NULL REFERENCES results(id),
+        judge_model TEXT NOT NULL,
+        attempt INTEGER NOT NULL,
+        label TEXT NOT NULL,
+        latency_ms REAL NOT NULL,
+        created_at TEXT NOT NULL
+    ) STRICT
+""")
+
+connection.execute("CREATE INDEX IF NOT EXISTS idx_scores_result ON scores (result_id)")
+
 connection.execute("CREATE INDEX IF NOT EXISTS idx_results_run ON results (run_id, case_id, model, sample, turn)")
 
 connection.commit()
 
-for table in ("runs", "cases", "results"):
+for table in ("runs", "cases", "results", "scores"):
     print(table)
     for column in connection.execute(f"PRAGMA table_info({table})").fetchall():
         print("   ", column)
