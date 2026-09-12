@@ -1,5 +1,7 @@
 anthropic==1.4.0
 google-genai==2.22.0
+matplotlib==3.11.1
 openai==3.10.0
+pandas==3.0.5
 python-dotenv==1.2.3
 PyYAML==6.0.3
